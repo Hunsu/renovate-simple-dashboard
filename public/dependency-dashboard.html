@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>Dependency Dashboard</title>
+</head>
+<body>
+<div class='wrapper'>
+  { content }
+</div>
+</body>
+<style>
+  .wrapper {
+      margin-left: 20%;
+      margin-right: 20%;
+      background-color: rgba(0, 0, 0, 0);
+      width: 60%;
+      margin-top: 20px;
+      border: aqua solid 1px;
+      color: white
+  }
+  body {
+      width: 100%;
+      height: 100%;
+      background-color: rgb(134, 139, 144);
+  }
+</style>
+<script>
+  for (const dep of document.querySelectorAll('input[type="checkbox"]')) {
+    dep.addEventListener('click', async (event) => {
+      const li = event.target.parentNode
+      await fetch('update-issue', {
+        method: "POST",
+        body: JSON.stringify({
+          dep: li.textContent,
+          selected: event.target.checked
+        }),
+        headers: {
+          "Content-Type": 'application/json'
+        }
+      })
+    })
+  }
+</script>
+</html>
